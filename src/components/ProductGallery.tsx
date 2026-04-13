@@ -14,7 +14,7 @@ interface Product {
   flavor: string;
 }
 
-export default function ProductGallery({ initialProducts }: { initialProducts: Product[] }) {
+export default function ProductGallery({ initialProducts }) {
   const [searchQuery, setSearchQuery] = useState('');
 
   // Client-side filtering logic
