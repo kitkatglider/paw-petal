@@ -103,7 +103,7 @@ async function setup() {
 
   // Insert mock products if empty
   const count = await db.get('SELECT COUNT(*) as count FROM products');
-  if (count.count === 0) {
+  if (count?.count === 0) {
     await db.run(`INSERT INTO products (name, price, description, image_url, badge, flavor) VALUES 
       ('Wilderness Blend: Pacific Salmon', 42.00, 'Grain-free holistic recipe with wild-caught salmon and prebiotic fiber for sensitive digestion.', 'https://lh3.googleusercontent.com/aida-public/AB6AXuC7IFbxlz5dbSaWGetOp3dgygy1ccNjPYfQzmPFUkfbH5xZCYud8rhoYwX0fqwquZ0J4ci6njwmhws1LBi4kUROck_IsCMi8GC0uLwW3UrPoNB2H655vdODC1wckhkdmWmHrlPKM5wMR-u5ixqu2QMnCdJe8wx8JxoBZ-4hSvCs-vCVCrwpFmk7y2nyn3GAxHjklMOGzSj4J28AbTLZCoH3FbgAL6juWF-NixMa6nPQzswuyw1R_Qd7IMWxeJgC-T6LruwoPvjyR4e8', 'New Arrival', 'Wild Salmon'),
       ('Heritage Grain: Pasture Beef', 38.50, 'Slow-roasted grass-fed beef with ancient grains and farm-fresh spinach.', 'https://lh3.googleusercontent.com/aida-public/AB6AXuCdUoR0QNEygzOVBK4rjMyomSqgUZT4pBVS6RM_UctuOGApfmbcfnXQinS6c4fJSzUURh-4QBxQr4-6TU_Y21yeRV5OhjBeSekpPSLdzmzQEyQ9H8HXMp-xObJuCUJ7URabvwihCH-kM45lre0shlL5U5WdzBZUin3aFgBLR0DRtKJQMj-CESf1FzNsnOS46oQmgXlnYpLcj_6stkvdPnWrVh-Je1m6wk_KtaCGsshRe6yOpuGr0FZX_RsEK7480p59Mvh6Zl5gTDuS', NULL, 'Grass-Fed Beef'),
