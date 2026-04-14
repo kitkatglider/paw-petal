@@ -1,28 +1,17 @@
 // lib/tursoDb.ts
-import { createClient, type LibSQLClient } from '@libsql/client';
+import { Client, createClient } from '@libsql/client';
 
 type RunResult = { lastID?: number; changes: number };
 type Row = Record<string, any>;
 
-/**
- * Keep the same openDb() interface. Returns an object with a subset of the sqlite Database API:
- * - run(sql, params?) -> { lastID?, changes }
- * - get(sql, params?) -> single row or undefined
- * - all(sql, params?) -> array of rows
- * - exec(sql) -> void (for multiple-statement exec)
- * - close() -> void (no-op for HTTP client)
- *
- * Requires TURSO_URL and TURSO_TOKEN env vars.
- */
+let client: Client | null = null;
 
-let client: LibSQLClient | null = null;
-
-function getClient(): LibSQLClient {
+function getClient() {
   if (!client) {
-    const url = process.env.TURSO_URL;
+    const url = process.env.TURSO_URL  ?? "file:paws_and_petals.sqlite";
     const token = process.env.TURSO_TOKEN;
-    if (!url || !token) throw new Error('TURSO_URL and TURSO_TOKEN must be set in env');
-    client = createClient({ url, auth: { bearer: token } });
+    // if (!url || !token) throw new Error('TURSO_URL and TURSO_TOKEN must be set in env');
+    client = createClient({ url, authToken: token });
   }
   return client;
 }
@@ -35,7 +24,7 @@ export async function openDb() {
     async run(sql: string, params?: any[] | Record<string, any>): Promise<RunResult> {
       const res = await c.execute(sql, params);
       // libSQL returns metadata in res.metadata (may vary); use res.rowsAffected if present
-      const changes = (res?.rowCount ?? res?.rows?.length ?? 0) as number;
+      const changes = Number(res.rowsAffected || 0);
       // libSQL doesn't expose lastInsertRowid over HTTP; try to extract from rows if RETURNING used
       let lastID: number | undefined = undefined;
       if (res?.rows && res.rows.length > 0) {

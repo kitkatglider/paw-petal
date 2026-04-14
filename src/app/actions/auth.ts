@@ -32,7 +32,7 @@ export async function login(prevState: any, formData: FormData) {
       
       loginSuccessful = true;
     } else {
-      return { error: "Invalid registry email or access key." };
+      return { error: "Invalid email or password" };
     }
   } catch (err) {
     console.error("Auth Error:", err);

@@ -17,10 +17,10 @@ export default function LoginPage() {
             <ShieldCheck size={32} strokeWidth={1.5} />
           </div>
           <h1 className="font-headline text-4xl font-extrabold tracking-tight mb-3 uppercase">
-            The Editorial <span className="text-primary italic">Journal</span>
+            Account <span className="text-primary italic">Log in</span>
           </h1>
           <p className="text-on-surface-variant text-sm font-medium leading-relaxed">
-            Enter your credentials to access your tailored pet nutrition profile.
+            Enter your credentials to access your profile
           </p>
         </header>
 
@@ -38,7 +38,7 @@ export default function LoginPage() {
           <form action={formAction} className="space-y-8">
             <div className="space-y-2">
               <label className="block text-[10px] font-black uppercase tracking-[0.3em] text-on-surface-variant ml-1">
-                Registry Email
+                Email
               </label>
               <input 
                 name="email"
@@ -52,7 +52,7 @@ export default function LoginPage() {
 
             <div className="space-y-2">
               <label className="block text-[10px] font-black uppercase tracking-[0.3em] text-on-surface-variant ml-1">
-                Access Key
+                Password
               </label>
               <input 
                 name="password"

@@ -3,18 +3,10 @@
 import { useState } from 'react';
 import { Search, ShoppingCart } from 'lucide-react';
 import AddToCartButton from './AddToCartButton';
+import { Product } from '@/types/cart';
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  description: string;
-  image_url: string;
-  badge: string | null;
-  flavor: string;
-}
 
-export default function ProductGallery({ initialProducts }) {
+export default function ProductGallery({ initialProducts }: { initialProducts: Product[] }) {
   const [searchQuery, setSearchQuery] = useState('');
 
   // Client-side filtering logic

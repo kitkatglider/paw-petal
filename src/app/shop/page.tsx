@@ -1,6 +1,7 @@
 import { openDb } from "@/lib/db";
 import FilterSidebar from "@/components/FilterSidebar";
 import ProductGallery from "@/components/ProductGallery";
+import { Product } from "@/types/cart";
 
 interface ShopProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -36,7 +37,7 @@ export default async function Shop({ searchParams }: ShopProps) {
       <div className="flex flex-col md:flex-row gap-12">
         <FilterSidebar />
         {/* Pass the server-fetched products to the client component */}
-        <ProductGallery initialProducts={products} />
+        <ProductGallery initialProducts={products as Product[]} />
       </div>
     </main>
   );

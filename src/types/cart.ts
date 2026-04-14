@@ -14,3 +14,13 @@ export interface CartContextType {
   totalItems: number;
   totalPrice: number;
 }
+
+export interface Product {
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+  image_url: string;
+  badge: string | null;
+  flavor: string;
+}
